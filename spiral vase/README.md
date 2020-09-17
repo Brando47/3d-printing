@@ -1,0 +1,7 @@
+# Spiral Vase
+
+Custom designed vase with a spiral exterior pattern.
+
+Initially designed for "vase" mode continuous printing, the first print failed due to steep overhangs. The file was redesigned (v2) to reduce the maximum overhang angles, and was then printed conventially with several perimeters to increase strength/longevity, and help the part stay watertight. To print it conventially despite being a solid model, a 0% infill was set in the slicer with no top layers. Additionally, a modifier was set to use 4 layer thickness (as opposed to 2 for the rest) in the bottom 80mm of the piece, as this is the part that will contain water. This will also help the stability of the piece by lowering the centre of gravity substantially.
+
+Printed at 0.35mm layer height with a 6mm nozzle and default 0.68mm extrusion width. Speeds were reduced to ~42mm/s during the print as the maximum volumetric speed exceeded that capable of the hot end at an ambient temp of 16 degC, reducing extruder temp from the set 215 degC by up to 5 degC until the reduction was put in place. The max volumetric speed was set in the PrusaSlicer software beforehand at 12mm^3/s but did not seem to effect the actual printing speeds as desired. "Ensure vertical shell thickness" was turned off to reduce unsightly infill patterns placed precariously around the interior of the vase in an attempt to thicken it by the slicing software, instead, "extra perimeters if needed" was enabled. 
