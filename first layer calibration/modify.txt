@@ -1,0 +1,4 @@
+e.g. find and replace:
+G1 Z0.800 ; lift Z
+with:
+G1 Z0.800 ; lift Z\nG1 Y205; move bed forwards for inspection\nG4 S10; pause for inspection
