@@ -1,6 +1,6 @@
 
-generate_lid=false;
-generate_box=true;
+generate_lid=true;
+generate_box=false;
 
 width=139;
 length=249;
@@ -14,25 +14,44 @@ fillet_size=5;
 i_width=width-clearance;
 i_length=length-clearance;
 cutout_fillet=cutout_size/6;
+lid_height=cutout_size+5;
+lid_cutout_depth=lid_height/2;
 
 $fn=50;
 // inside box
-difference()
-{
-    // generate basic shape
-    base_box(i_width, i_length, height);
-    
-    // subtracting main cutout
-    translate([i_width/2, i_length+0.01, height]) rotate(a=90, v=[1,0,0]) cylinder(r1=cutout_size, r2=cutout_size, h=i_length+0.02);
-    
-    // subtracting cutout fillets
+if(generate_box) {
     difference()
     {
-        translate([i_width/2-cutout_size-cutout_fillet+0.01, 0,  height-cutout_fillet+0.01]) cube([2*(cutout_fillet+cutout_size), i_length+0.02, cutout_fillet]);
-        translate([i_width/2-sqrt(cutout_size*cutout_size-cutout_fillet*cutout_fillet)-cutout_fillet+0.01, i_length+0.01, height-cutout_fillet+0.01]) rotate(a=90, v=[1,0,0]) cylinder(r1=cutout_fillet, r2=cutout_fillet, h=i_length+0.02);
-        translate([i_width/2+sqrt(cutout_size*cutout_size-cutout_fillet*cutout_fillet)+cutout_fillet-0.01, i_length+0.01, height-cutout_fillet+0.01]) rotate(a=90, v=[1,0,0]) cylinder(r1=cutout_fillet, r2=cutout_fillet, h=i_length+0.02);
+        // generate basic shape
+        base_box(i_width, i_length, height);
+        
+        // subtracting main cutout
+        translate([i_width/2, i_length+0.01, height]) rotate(a=90, v=[1,0,0]) cylinder(r=cutout_size, h=i_length+0.02);
+        
+        // subtracting cutout fillets
+        difference()
+        {
+            translate([i_width/2-cutout_size-cutout_fillet+0.01, 0,  height-cutout_fillet+0.01]) cube([2*(cutout_fillet+cutout_size), i_length+0.02, cutout_fillet]);
+            translate([i_width/2-sqrt(cutout_size*cutout_size-cutout_fillet*cutout_fillet)-cutout_fillet+0.01, i_length+0.01, height-cutout_fillet+0.01]) rotate(a=90, v=[1,0,0]) cylinder(r=cutout_fillet, h=i_length+0.02);
+            translate([i_width/2+sqrt(cutout_size*cutout_size-cutout_fillet*cutout_fillet)+cutout_fillet-0.01, i_length+0.01, height-cutout_fillet+0.01]) rotate(a=90, v=[1,0,0]) cylinder(r=cutout_fillet, h=i_length+0.02);
+        }
     }
 }
+
+// lid
+if(generate_lid) {
+    translate([generate_box ? width+10 : 0,0,0])
+    {
+        
+        difference()
+        {
+            base_box(width, length, lid_height);
+            translate([-0.01,length/2,length+lid_height-lid_cutout_depth]) rotate(a=90, v=[0,1,0]) cylinder(r=length, h=width+0.02, $fn=200);
+        }
+        
+    }
+}
+
 
 module base_box (width, length, height)
 {
