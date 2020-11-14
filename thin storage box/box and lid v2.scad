@@ -1,6 +1,6 @@
 
 generate_lid=true;
-generate_box=false;
+generate_box=true;
 
 width=139;
 length=249;
@@ -8,11 +8,11 @@ height=139;
 
 wall_thickness=1.27;
 cutout_size=30;
-clearance=0;
+clearance=0.3;
 fillet_size=5;
 
-i_width=width-clearance;
-i_length=length-clearance;
+i_width=width-2*wall_thickness-2*clearance;
+i_length=length-2*wall_thickness-2*clearance;
 cutout_fillet=cutout_size/6;
 lid_height=cutout_size+5;
 lid_cutout_depth=lid_height/2;
