@@ -46,6 +46,8 @@ if(generate_lid) {
         difference()
         {
             base_box(width, length, lid_height);
+            
+            //remove side cutouts
             translate([-0.01,length/2,length+lid_height-lid_cutout_depth]) rotate(a=90, v=[0,1,0]) cylinder(r=length, h=width+0.02, $fn=200);
         }
         
