@@ -1,4 +1,89 @@
+//non-modular quick print
+
+//whole vent 15-20 from horizontal
+// individual vents 45-50 from horizontal
+
 use <snap_fit.scad>
+use <fillet.scad>
+
+$fn=100;
+wall_thickness=1;
+
+clips=true;
+duct=true;
+
+if(clips)
+{
+    translate([50,0,0])
+    clip();
+
+    translate([50,20,0])
+    clip();
+}
+
+
+if(duct)
+{
+    //rotate([-20, 0, 0])
+    //rotate([20, 0, 0])
+    union()
+    {
+        difference()
+        {
+            translate([0,0,-20])
+            difference()
+            {
+                
+                rotate([0, 90, 0])
+                cylinder(r=80, h=172);
+                
+                translate([wall_thickness, 0, 0])
+                rotate([0, 90, 0])
+                cylinder(r=80 - wall_thickness, h=172 - 2*wall_thickness);
+                
+                translate([-499, -80, -499])
+                cube([999, 80, 999]);
+                
+                translate([-499, -499, -81])
+                cube([999, 999, 81]);
+                
+            }
+            translate([-499, -499, -21])
+            cube([999, 999, 21]);
+        }
+        
+        difference()
+        {
+            translate([0, -20, 0])
+            cube([172, 20, 60]);
+            
+            translate([wall_thickness, -21, -1])
+            cube([172 - 2*wall_thickness, 21 + 0.01, 60 - wall_thickness + 1]);
+        }
+    }
+}
+
+
+translate([wall_thickness,0,0])
+catch();
+
+
+module catch()
+{
+    
+    difference()
+    {
+        cube([2.5, 9.2, 13] + wall_thickness*[1,2,1]);
+        
+        translate([-1, wall_thickness, -1])
+        cube([2.5 + wall_thickness + 2, 9.2, 13 + 1]);
+    }
+    
+    translate([2.5, 9.2/2, 13])
+    rotate([0,90,0])
+    loop(c3=wall_thickness, c4=wall_thickess/2);
+    
+}
 
 module clip()
 {
@@ -24,8 +109,3 @@ module clip()
         
     }
 }
-
-clip();
-
-translate([0,20,0])
-clip();
