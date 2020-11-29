@@ -79,9 +79,9 @@ module catch()
         cube([2.5 + wall_thickness + 2, 9.2, 13 + 1]);
     }
     
-    translate([2.5, 9.2/2, 13])
+    translate([2.5, wall_thickness + (9.2 - 8.5)/2, 13])
     rotate([0,90,0])
-    loop(c3=wall_thickness, c4=wall_thickess/2);
+    loop(c1=8.5, c2=5+2.8+1, c3=wall_thickness, c4=wall_thickness/2, d1=2, d2=3, d3=2, d4=1);
     
 }
 
@@ -98,10 +98,10 @@ module clip()
         
         translate([0,2.5,0])
         rotate([90,0,180])
-        hook(b4=4.2, b1=2.5, b5=9.2, b3=2.5, a1=0, a4=90, a5=13.5, a2=0.6, a3=2.5);
+        #hook(b4=4.2, b1=2.5, b5=4.2, b3=2.5, a1=0, a4=90, a5=13.5, a2=0.6, a3=2.5);
         
         translate([-13,0,0])
-        cube([5,9.2,2.5]);
+        #cube([5,9.2,2.5]);
         translate([-8,0,0])
         cube([8,2.5,2.5]);
         translate([-8,6.7,0])
