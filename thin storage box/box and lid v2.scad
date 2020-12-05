@@ -4,11 +4,11 @@ generate_box=true;
 
 width=139;
 length=249;
-height=139;
+height=134;
 
-wall_thickness=1.27;
+wall_thickness=1.87; //1.27 for 2 perimeters
 cutout_size=30;
-clearance=0.3;
+clearance=0.4;
 fillet_size=5;
 
 i_width=width-2*wall_thickness-2*clearance;
