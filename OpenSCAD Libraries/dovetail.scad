@@ -1,9 +1,9 @@
 use <fillets.scad>;
 $fn=50;
 
-module dovetail(thin_w=4, thick_w=8, l=8, h=2.5, male=true, clearance=0.3, fillets=true, fillet_radius=0.5)
+module dovetail(thin_w=4, thick_w=8, l=6, h=2.5, female=false, clearance=0.3, fillets=true, fillet_radius=0.5)
 {
-    if (male)
+    if (female == false)
     {
         difference()
         {
@@ -100,6 +100,6 @@ module dovetail(thin_w=4, thick_w=8, l=8, h=2.5, male=true, clearance=0.3, fille
 }
 
 %translate([0,0,-1])
-dovetail(male=false);
+dovetail(female=true);
 
-dovetail(male=true);
+dovetail(female=false);
