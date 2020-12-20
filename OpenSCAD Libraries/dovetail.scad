@@ -3,6 +3,7 @@ $fn=50;
 
 module dovetail(thin_w=4, thick_w=8, l=6, h=2.5, female=false, clearance=0.3, fillets=true, fillet_radius=0.5)
 {
+    nothing=0.001; //combats rounding errors leading to non-manifold mesh
     if (female == false)
     {
         difference()
@@ -22,7 +23,7 @@ module dovetail(thin_w=4, thick_w=8, l=6, h=2.5, female=false, clearance=0.3, fi
                     theta=atan(l/(thick_w/2 - thin_w/2));
                     for (i = [-1,1]) {
                     
-                        translate([i*thin_w/2,0,0])
+                        translate([i*(thin_w/2-nothing),nothing,0])
                         rotate([0,0,45-i*(90+theta/2)])
                         fillet(l=h, r=fillet_radius, a=theta, center=false);
                         
@@ -34,7 +35,6 @@ module dovetail(thin_w=4, thick_w=8, l=6, h=2.5, female=false, clearance=0.3, fi
             {
                 
                 theta=atan(l/(thick_w/2 - thin_w/2));
-                nothing=0.001;
                 for (i = [-1,1]) {
                     
                     translate([i*(thick_w/2+nothing),-l-nothing,-1])
@@ -74,7 +74,7 @@ module dovetail(thin_w=4, thick_w=8, l=6, h=2.5, female=false, clearance=0.3, fi
                 {
                     for (i = [-1,1]) {
                         
-                        translate([i*(a+thin_w/2),0,0])
+                        translate([i*(a+thin_w/2-nothing),nothing,0])
                         rotate([0,0,45-i*(90+theta/2)])
                         fillet(l=h, r=fillet_radius, a=theta, center=false);
                     }
@@ -84,7 +84,6 @@ module dovetail(thin_w=4, thick_w=8, l=6, h=2.5, female=false, clearance=0.3, fi
             //remove bottom fillets
             if (fillets)
             {
-                nothing=0.001;
                 for (i = [-1,1]) {
                     
                     translate([i*(a+thin_w/2+b+nothing),-l-clearance-nothing,-1])
