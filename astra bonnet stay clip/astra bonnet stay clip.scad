@@ -3,8 +3,9 @@ use <mirror_offset.scad>;
 height=25;
 width=18.374;
 
-thickness=10;
+thickness=8;
 
+render()
 difference() {
     linear_extrude(thickness)
     import("astra bonnet stay clip.svg");
