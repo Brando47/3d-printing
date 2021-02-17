@@ -16,7 +16,7 @@ module hook (a1=1, a2=1, a3=2.5, a4=50, a5=50, b1=2, b2=5.5, b3=1.4, b4=2.5, b5=
     difference()
     {
         
-        linear_extrude(b4)
+        linear_extrude(b4, convexity=2)
         polygon([   [0, 0], 
                     [0, b1], 
                     [b2, b1], 
